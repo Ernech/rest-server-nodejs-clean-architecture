@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { AuthRoutes } from "./auth/routes";
+import { CategoryRoutes } from "./categories/routes";
+import { ProductRoutes } from "./product/routes";
 
 export class AppRoutes{
 
@@ -8,6 +10,8 @@ export class AppRoutes{
         const router = Router();
 
         router.use('/api/auth',AuthRoutes.routes);
+        router.use('/api/categories',CategoryRoutes.getRoutes);
+        router.use('/api/products',ProductRoutes.getRoutes)
 
         return router;
     } 
