@@ -23,11 +23,12 @@ export class CategoryController{
 
 
     createCategory = async(req:Request, res:Response)=>{
+        
         const {name, user} =req.body
         const [error, categoryDto] = CategoryDTO.create({name})
         if (error || !categoryDto ) return res.status(400).json({error});
         
-        new CreateCategory(this.categoryRepository).execute(categoryDto, user.userId)
+        new CreateCategory(this.categoryRepository).execute(categoryDto, String(user._id))
         .then((data)=>res.status(201).json(data)).catch(error=>this.handleError(error,res));
         
 

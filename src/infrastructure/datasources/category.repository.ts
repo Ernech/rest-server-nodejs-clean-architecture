@@ -13,11 +13,12 @@ export class CategoryDataSourceImp implements CategoryDatasource {
 
         try {
 
-            const newCategory = await CategoryModel.create(categoryDto);
+            const {name} = categoryDto;
+            const newCategory = await CategoryModel.create({name,user:userId});
 
             await newCategory.save();
-
-            return CategoryMapper.categoryEntityFromObject({ ...newCategory, userId });
+            
+            return CategoryMapper.categoryEntityFromObject(newCategory);
 
         } catch (error) {
             if (error instanceof CustomError) {

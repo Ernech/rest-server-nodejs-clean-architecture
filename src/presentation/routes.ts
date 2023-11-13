@@ -10,7 +10,7 @@ export class AppRoutes{
         const router = Router();
 
         router.use('/api/auth',AuthRoutes.routes);
-        router.use('/api/categories',CategoryRoutes.getRoutes);
+        router.use('/api/categories',CategoryRoutes.routes);
         router.use('/api/products',ProductRoutes.getRoutes)
 
         return router;

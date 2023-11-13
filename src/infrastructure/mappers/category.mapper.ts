@@ -6,16 +6,16 @@ export class CategoryMapper{
 
     static categoryEntityFromObject(object:{[key:string]:any}){
 
-        const { _id, id,name, userId } = object;
-
-        if(!_id || !id){
+        const { _id ,name, user } = object;
+        
+        if(!_id){
             throw CustomError.badRequest('Missing id');
         }
 
         if(!name) CustomError.badRequest('Name is required');
-        if(!userId) CustomError.badRequest('User id is reqiuired');
+        if(!user) CustomError.badRequest('User id is reqiuired');
 
-        return new CategoryEntity(id || _id, name, userId);
+        return new CategoryEntity(_id, name, user);
 
     }
 
