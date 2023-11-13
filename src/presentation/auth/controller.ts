@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
 import { AuthRepository, CustomError, RegisterUserDto, ResgisterUser } from "../../domain"
-import { JwtAdapter } from "../../config";
 import { UserModel } from "../../data/mongodb";
 import { LoginUserDto } from "../../domain/dtos/auth/login-user.dto";
 import { LoginUser } from "../../domain/use-cases/auth/login-user.use-case";

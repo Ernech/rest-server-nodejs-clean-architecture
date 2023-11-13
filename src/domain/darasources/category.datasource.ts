@@ -3,7 +3,7 @@ import { CategoryEntity } from "../entities/category.entity";
 
 export abstract class CategoryDatasource{
 
-    abstract createCategory(categoryDto:CategoryDTO):Promise<CategoryEntity>;
+    abstract createCategory(categoryDto:CategoryDTO, userId:string):Promise<CategoryEntity>;
 
     abstract getCategoryById(categoryId:string):Promise<CategoryEntity>;
 
