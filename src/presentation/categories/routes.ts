@@ -17,6 +17,7 @@ export class CategoryRoutes{
         const controller = new CategoryController(categoryRepository);
 
         router.post('/',AuthMiddleware.validateJwt,controller.createCategory);
+        router.get('/',controller.getCategories);
 
 
         return router;

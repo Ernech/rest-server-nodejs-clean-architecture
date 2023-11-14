@@ -31,8 +31,32 @@ export class CategoryDataSourceImp implements CategoryDatasource {
     getCategoryById(categoryId: string): Promise<CategoryEntity> {
         throw new Error("Method not implemented.");
     }
-    getAllCategories(): Promise<CategoryEntity[]> {
-        throw new Error("Method not implemented.");
+
+    async getAllCategories(): Promise<CategoryEntity[]> {
+        try {
+
+            const categories = await CategoryModel.find({status:true});
+
+            if(!categories || categories.length===0) return [];
+
+            const categoriesEntities:CategoryEntity[] =[];
+
+            for(let i=0; i<categories.length; i++){
+
+                categoriesEntities.push(CategoryMapper.categoryEntityFromObject(categories[i]));
+            }
+
+            return categoriesEntities;
+
+
+        } catch (error) {
+
+            if (error instanceof CustomError) {
+                throw error
+            }
+            throw CustomError.internalServer();
+
+        }
     }
     editCategory(categoryId: string, categoryDto: CategoryDTO): Promise<CategoryEntity> {
         throw new Error("Method not implemented.");
