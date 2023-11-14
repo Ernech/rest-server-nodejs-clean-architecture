@@ -1,8 +1,9 @@
 import { Router } from "express"
-import { CategoryDataSourceImp } from "../../infrastructure/datasources/category.repository";
+import { CategoryDataSourceImp } from "../../infrastructure/datasources/category.datasource";
 import { CategoryRepositoryImpl } from "../../infrastructure/repositories/category.repository.";
 import { CategoryController } from "./controller";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
+import { IsValidMongoId } from "../middlewares/mongoId.middleware";
 
 
 export class CategoryRoutes{
@@ -18,6 +19,7 @@ export class CategoryRoutes{
 
         router.post('/',AuthMiddleware.validateJwt,controller.createCategory);
         router.get('/',controller.getCategories);
+        router.put('/:id',[AuthMiddleware.validateJwt, IsValidMongoId.checkId],controller.updateCategory);
 
 
         return router;

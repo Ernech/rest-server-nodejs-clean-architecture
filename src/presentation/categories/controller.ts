@@ -4,6 +4,7 @@ import { CategoryRepository } from "../../domain/repositories/category.repositor
 import { Request, Response } from "express";
 import { CreateCategory } from "../../domain/use-cases/category/create-category.use-case";
 import { GetAllCategories } from "../../domain/use-cases/category/get-all-categories.use-case";
+import { UpdateCategory } from "../../domain/use-cases/category/update-category.use-case";
 
 export class CategoryController{
 
@@ -39,6 +40,20 @@ export class CategoryController{
 
         new GetAllCategories(this.categoryRepository).execute(Number(limit),Number(offset))
         .then((data)=>res.status(200).json(data)).catch(error=> this.handleError(error,res));
+    }
+
+    updateCategory = async(req:Request, res:Response)=>{
+        
+        const {user, name} = req.body;
+        const {id} = req.params;
+
+        const [error, categoryDto] = CategoryDTO.create({name})
+        if (error || !categoryDto ) return res.status(400).json({error});
+        
+
+        new UpdateCategory(this.categoryRepository).execute(categoryDto,user._id,id)
+        .then(data=> res.status(201).json(data)).catch(error=>this.handleError(error,res));
+
     }
 
 }

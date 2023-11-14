@@ -9,8 +9,7 @@ export abstract class CategoryRepository{
 
     abstract getAllCategories(limit:number,offset:number):Promise<CategoryEntity[]>;
 
-    abstract editCategory(categoryId:string,categoryDto:CategoryDTO):Promise<CategoryEntity>;
+    abstract editCategory(categoryId:string,userId:string,categoryDto:CategoryDTO):Promise<CategoryEntity>;
 
     abstract deleteCategory(categoryId:string):Promise<CategoryEntity>;
-
 }

@@ -58,8 +58,22 @@ export class CategoryDataSourceImp implements CategoryDatasource {
 
         }
     }
-    editCategory(categoryId: string, categoryDto: CategoryDTO): Promise<CategoryEntity> {
-        throw new Error("Method not implemented.");
+    async editCategory(categoryId: string, userId:string ,categoryDto: CategoryDTO): Promise<CategoryEntity> {
+        
+        try {
+            const categoryToEdit = await CategoryModel.findByIdAndUpdate(categoryId,{...categoryDto, user:userId},{new:true});
+        if(!categoryToEdit){
+            throw CustomError.notFound(`The category with the id ${categoryId} does not exists`);
+        }
+            return CategoryMapper.categoryEntityFromObject(categoryToEdit);
+
+        } catch (error) {
+            
+            if (error instanceof CustomError) {
+                throw error
+            }
+            throw CustomError.internalServer();
+        }
     }
     deleteCategory(categoryId: string): Promise<CategoryEntity> {
         throw new Error("Method not implemented.");
