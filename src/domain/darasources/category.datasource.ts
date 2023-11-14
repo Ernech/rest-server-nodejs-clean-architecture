@@ -7,7 +7,7 @@ export abstract class CategoryDatasource{
 
     abstract getCategoryById(categoryId:string):Promise<CategoryEntity>;
 
-    abstract getAllCategories():Promise<CategoryEntity[]>;
+    abstract getAllCategories(limit:number,offset:number):Promise<CategoryEntity[]>;
 
     abstract editCategory(categoryId:string,categoryDto:CategoryDTO):Promise<CategoryEntity>;
 

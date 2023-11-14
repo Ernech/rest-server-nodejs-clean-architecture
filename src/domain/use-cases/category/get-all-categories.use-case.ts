@@ -4,7 +4,7 @@ import { CategoryRepository } from "../../repositories/category.repository";
 
 interface GetAllCategoriesUseCase{
 
-    execute():Promise<CategoryEntity[]>
+    execute(limit:number,offset:number):Promise<CategoryEntity[]>
 
 }
 
@@ -14,8 +14,8 @@ export class GetAllCategories implements GetAllCategoriesUseCase{
         private readonly categoryRepository:CategoryRepository
     ){}
 
-    async execute(): Promise<CategoryEntity[]> {
+    async execute(limit:number, offset:number): Promise<CategoryEntity[]> {
 
-        return await this.categoryRepository.getAllCategories();
+        return await this.categoryRepository.getAllCategories(limit,offset);
     }
 }

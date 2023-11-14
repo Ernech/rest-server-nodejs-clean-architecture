@@ -32,10 +32,10 @@ export class CategoryDataSourceImp implements CategoryDatasource {
         throw new Error("Method not implemented.");
     }
 
-    async getAllCategories(): Promise<CategoryEntity[]> {
+    async getAllCategories(limit:number, offset:number): Promise<CategoryEntity[]> {
         try {
 
-            const categories = await CategoryModel.find({status:true});
+            const categories = await CategoryModel.find({status:true}).skip(offset).limit(limit);
 
             if(!categories || categories.length===0) return [];
 

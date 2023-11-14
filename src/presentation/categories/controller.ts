@@ -35,7 +35,9 @@ export class CategoryController{
     }
 
     getCategories = async(req:Request, res:Response)=>{
-        new GetAllCategories(this.categoryRepository).execute()
+        const {limit=5, offset=0} = req.query;
+
+        new GetAllCategories(this.categoryRepository).execute(Number(limit),Number(offset))
         .then((data)=>res.status(200).json(data)).catch(error=> this.handleError(error,res));
     }
 
