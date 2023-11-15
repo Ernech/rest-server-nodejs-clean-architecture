@@ -6,6 +6,7 @@ import { CreateCategory } from "../../domain/use-cases/category/create-category.
 import { GetAllCategories } from "../../domain/use-cases/category/get-all-categories.use-case";
 import { UpdateCategory } from "../../domain/use-cases/category/update-category.use-case";
 import { GetCategoryById } from "../../domain/use-cases/category/get-category-by-is.use-case";
+import { DeleteCategory } from "../../domain/use-cases/category/delete-category.use-case";
 
 export class CategoryController{
 
@@ -64,4 +65,11 @@ export class CategoryController{
         new GetCategoryById(this.categoryRepository).execute(id)
         .then(data=> res.status(200).json(data)).catch(error=>this.handleError(error,res));
     }
+
+    deleteCategory = async(req:Request, res:Response)=>{
+        const {id} = req.params;
+        new DeleteCategory(this.categoryRepository).execute(id)
+        .then(data=> res.status(200).json(data)).catch(error=>this.handleError(error,res));
+    }
+
 }

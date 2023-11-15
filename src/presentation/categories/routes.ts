@@ -20,6 +20,7 @@ export class CategoryRoutes{
         router.post('/',AuthMiddleware.validateJwt,controller.createCategory);
         router.get('/',controller.getCategories);
         router.get('/:id',IsValidMongoId.checkId,controller.getCategoryById);
+        router.delete('/:id',[AuthMiddleware.validateJwt,IsValidMongoId.checkId],controller.deleteCategory);
         router.put('/:id',[AuthMiddleware.validateJwt, IsValidMongoId.checkId],controller.updateCategory);
 
 

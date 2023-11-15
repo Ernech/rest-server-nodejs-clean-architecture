@@ -22,8 +22,8 @@ export class CategoryRepositoryImpl implements CategoryRepository{
    async editCategory(categoryId: string, userId:string,categoryDto: CategoryDTO): Promise<CategoryEntity> {
        return await this.categoryDatasource.editCategory(categoryId,userId,categoryDto);
     }
-    deleteCategory(categoryId: string): Promise<CategoryEntity> {
-        throw new Error("Method not implemented.");
+    async deleteCategory(categoryId: string): Promise<CategoryEntity> {
+        return this.categoryDatasource.deleteCategory(categoryId);
     }
     
 }
