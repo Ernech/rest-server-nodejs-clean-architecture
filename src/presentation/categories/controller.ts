@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 import { CreateCategory } from "../../domain/use-cases/category/create-category.use-case";
 import { GetAllCategories } from "../../domain/use-cases/category/get-all-categories.use-case";
 import { UpdateCategory } from "../../domain/use-cases/category/update-category.use-case";
+import { GetCategoryById } from "../../domain/use-cases/category/get-category-by-is.use-case";
 
 export class CategoryController{
 
@@ -56,4 +57,11 @@ export class CategoryController{
 
     }
 
+    getCategoryById = async(req:Request, res:Response)=>{
+
+        const {id} = req.params;
+
+        new GetCategoryById(this.categoryRepository).execute(id)
+        .then(data=> res.status(200).json(data)).catch(error=>this.handleError(error,res));
+    }
 }

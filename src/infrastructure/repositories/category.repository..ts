@@ -13,8 +13,8 @@ export class CategoryRepositoryImpl implements CategoryRepository{
     async createCategory(categoryDTO: CategoryDTO, userId: string): Promise<CategoryEntity> {
         return await this.categoryDatasource.createCategory(categoryDTO,userId);
     }
-    getCategoryById(categoryId: string): Promise<CategoryEntity> {
-        throw new Error("Method not implemented.");
+    async getCategoryById(categoryId: string): Promise<CategoryEntity> {
+        return await this.categoryDatasource.getCategoryById(categoryId);
     }
     async getAllCategories(limit:number, offset:number): Promise<CategoryEntity[]> {
         return await this.categoryDatasource.getAllCategories(limit,offset);
