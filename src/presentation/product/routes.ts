@@ -16,6 +16,7 @@ export class ProductRoutes{
         const productController = new ProductController(repository);
 
         router.post('/',[AuthMiddleware.validateJwt, IsValidMongoId.checkIdFromRequestBody],productController.createProduct)
+        router.get('/:id',[AuthMiddleware.validateJwt, IsValidMongoId.checkId],productController.getProductById);
         return router;
 
 

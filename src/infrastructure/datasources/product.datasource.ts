@@ -26,11 +26,20 @@ export class ProductDatasourceIml implements ProductDatasource{
         }
         
     }
-    getProducts(offset: number, limit: number): Promise<ProductEntity[]> {
+    async getProducts(offset: number, limit: number): Promise<ProductEntity[]> {
         throw new Error("Method not implemented.");
     }
-    getProductById(productId: string): Promise<ProductEntity> {
-        throw new Error("Method not implemented.");
+    async getProductById(productId: string): Promise<ProductEntity> {
+        try {
+            const product = await ProductModel.findOne({_id:productId,status:true})
+            if(!product) throw CustomError.notFound(`THe product with the id: ${productId} does not exists`);
+            return ProductMapper.productEntityFromObject(product);
+        } catch (error) {
+            if(error instanceof CustomError){
+                throw error;
+            }
+           throw CustomError.internalServer('internal server')
+        }
     }
     getProductsByCategory(categoryId: string): Promise<ProductEntity[]> {
         throw new Error("Method not implemented.");
