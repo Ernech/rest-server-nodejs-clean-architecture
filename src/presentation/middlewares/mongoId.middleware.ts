@@ -14,4 +14,15 @@ export class IsValidMongoId{
 
     }
 
+    static checkIdFromRequestBody=(req:Request, res:Response,next: NextFunction)=>{
+ 
+        const {category} = req.body;
+
+        if(!isValidObjectId(category))  return res.status(400).json({msg:'Invalid category mongo id'});
+
+        next()
+
+
+    }
+
 }

@@ -4,8 +4,9 @@ export class ProductEntity{
         public id:string,
         public readonly name:string,
         public readonly description:string,
-        public readonly categoryId:string,
-        public readonly userId:string
+        public readonly available:boolean,
+        public readonly category:string,
+        public readonly user:string
     ){}
     
 }

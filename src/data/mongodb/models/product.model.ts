@@ -45,6 +45,6 @@ productSchema.methods.toJSON = function(){
     return data;
 }
 
-export const ProductMOdel = mongoose.model('Product',productSchema);
+export const ProductModel = mongoose.model('Product',productSchema);
 
 
