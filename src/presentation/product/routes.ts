@@ -17,6 +17,7 @@ export class ProductRoutes{
 
         router.post('/',[AuthMiddleware.validateJwt, IsValidMongoId.checkIdFromRequestBody],productController.createProduct)
         router.get('/:id',[AuthMiddleware.validateJwt, IsValidMongoId.checkId],productController.getProductById);
+        router.get('/',productController.getAllProducts);
         return router;
 
 

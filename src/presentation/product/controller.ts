@@ -4,6 +4,8 @@ import { CustomError } from "../../domain";
 import { ProductDTO } from "../../domain/dtos/product/product.dto";
 import { CreateProduct } from "../../domain/use-cases/product/create-product.use-case";
 import { GetProductById } from "../../domain/use-cases/product/get-product-byt-id.use-case";
+import { GetProducts } from "../../domain/use-cases/product/get-products.use-case";
+import { error } from "console";
 
 
 export class ProductController{
@@ -40,6 +42,12 @@ export class ProductController{
         new GetProductById(this.productRepository).execute(id)
         .then(data=>res.status(200).json(data)).catch(error=>this.handleError(error,res));
         
+    }
+
+    getAllProducts=async(req:Request,res:Response)=>{
+        const {limit=0,offset=0} = req.query;
+        new GetProducts(this.productRepository).execute(Number(offset),Number(limit))
+        .then(data=>res.status(200).json(data)).catch(error=>this.handleError(error,res));
     }
 
 }

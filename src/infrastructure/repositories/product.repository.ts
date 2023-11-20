@@ -11,10 +11,10 @@ export class ProductRepositoryImp implements ProductRepository{
     ){}
 
    async createProduct(productDTO: ProductDTO): Promise<ProductEntity> {
-        return this.productDatasource.createProduct(productDTO);
+        return await this.productDatasource.createProduct(productDTO);
     }
-    getProducts(offset: number, limit: number): Promise<ProductEntity[]> {
-        throw new Error("Method not implemented.");
+    async getProducts(offset: number, limit: number): Promise<ProductEntity[]> {
+        return await this.productDatasource.getProducts(offset,limit);
     }
     async getProductById(productId: string): Promise<ProductEntity> {
        return await this.productDatasource.getProductById(productId);
