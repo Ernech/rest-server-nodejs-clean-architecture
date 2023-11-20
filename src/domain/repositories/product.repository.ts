@@ -9,7 +9,7 @@ export abstract class ProductRepository{
 
     abstract getProductById(productId:string):Promise<ProductEntity>;
 
-    abstract getProductsByCategory(categoryId:string):Promise<ProductEntity[]>;
+    abstract getProductsByCategory(categoryId:string,offset:number, limit:number):Promise<ProductEntity[]>;
 
     abstract updateProduct(productId:string, categoryId:string):Promise<ProductEntity>;
 

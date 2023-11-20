@@ -8,6 +8,7 @@ import { IsValidMongoId } from "../middlewares/mongoId.middleware";
 export class ProductRoutes{
 
     static get routes(){
+ 
         const router = Router();
 
         const datasource = new ProductDatasourceIml();
@@ -18,6 +19,9 @@ export class ProductRoutes{
         router.post('/',[AuthMiddleware.validateJwt, IsValidMongoId.checkIdFromRequestBody],productController.createProduct)
         router.get('/:id',[AuthMiddleware.validateJwt, IsValidMongoId.checkId],productController.getProductById);
         router.get('/',productController.getAllProducts);
+        router.get('/category/:id',[IsValidMongoId.checkId],productController.getProductsByCategory);
+       
+       
         return router;
 
 
