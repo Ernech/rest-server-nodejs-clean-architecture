@@ -7,6 +7,7 @@ import { GetProductById } from "../../domain/use-cases/product/get-product-byt-i
 import { GetProducts } from "../../domain/use-cases/product/get-products.use-case";
 import { error } from "console";
 import { GetProductsByCategory } from "../../domain/use-cases/product/get-products-by-category.use-case";
+import { DeleteProduct } from "../../domain/use-cases/product/delete-product.use-case";
 
 
 export class ProductController{
@@ -57,5 +58,11 @@ export class ProductController{
 
         new GetProductsByCategory(this.productRepository).execute(id,Number(offset),Number(limit))
         .then(data=>res.status(200).json(data)).catch(error=>this.handleError(error,res));
+    }
+
+    deleteProduct = async(req:Request,res:Response)=>{
+        const { id } = req.params;
+        new DeleteProduct(this.productRepository).execute(id)
+        .then(data=>res.status(200).json(data))
     }
 }

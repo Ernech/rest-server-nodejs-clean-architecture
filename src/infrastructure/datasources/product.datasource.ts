@@ -70,11 +70,20 @@ export class ProductDatasourceIml implements ProductDatasource{
         }
     }
     
-    updateProduct(productId: string, categoryId: string): Promise<ProductEntity> {
+    async updateProduct(productId: string, categoryId: string): Promise<ProductEntity> {
         throw new Error("Method not implemented.");
     }
-    deleteProduct(productId: string): Promise<ProductEntity> {
-        throw new Error("Method not implemented.");
+   async deleteProduct(productId: string): Promise<ProductEntity> {
+        try {
+            const product = await ProductModel.findByIdAndUpdate(productId,{status:false},{new:true});
+            if(!product) throw CustomError.notFound(`The product with the id ${productId} doesn't exists`);
+            return ProductMapper.productEntityFromObject(product);
+        } catch (error) {
+            if(error instanceof CustomError){
+                throw error;
+            }
+            throw CustomError.internalServer('Internal server error');
+        }
     }
     
 }

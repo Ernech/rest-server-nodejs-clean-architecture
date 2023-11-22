@@ -22,10 +22,10 @@ export class ProductRepositoryImp implements ProductRepository{
    async getProductsByCategory(categoryId: string,offset:number, limit:number): Promise<ProductEntity[]> {
         return await this.productDatasource.getProductsByCategory(categoryId, offset,limit);
     }
-    updateProduct(productId: string, categoryId: string): Promise<ProductEntity> {
+    async updateProduct(productId: string, categoryId: string): Promise<ProductEntity> {
         throw new Error("Method not implemented.");
     }
-    deleteProduct(productId: string): Promise<ProductEntity> {
-        throw new Error("Method not implemented.");
+    async deleteProduct(productId: string): Promise<ProductEntity> {
+       return await this.productDatasource.deleteProduct(productId);
     }
 }
