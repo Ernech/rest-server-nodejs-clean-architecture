@@ -15,4 +15,6 @@ export abstract class ProductDatasource{
 
     abstract deleteProduct(productId:string):Promise<ProductEntity>;
 
+    abstract changeAvailability(productId:string):Promise<ProductEntity>;
+
 }

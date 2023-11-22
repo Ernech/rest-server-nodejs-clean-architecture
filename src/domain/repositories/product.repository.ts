@@ -14,5 +14,7 @@ export abstract class ProductRepository{
     abstract updateProduct(productId:string, productDTO:ProductDTO):Promise<ProductEntity>;
 
     abstract deleteProduct(productId:string):Promise<ProductEntity>;
+    
+    abstract changeAvailability(productId:string):Promise<ProductEntity>;
 
 }

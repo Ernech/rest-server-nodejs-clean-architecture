@@ -98,5 +98,19 @@ export class ProductDatasourceIml implements ProductDatasource{
             throw CustomError.internalServer('Internal server error');
         }
     }
-    
+    async changeAvailability(productId: string): Promise<ProductEntity> {
+        try {
+            const product = await ProductModel.findById(productId);
+            if(!product) throw CustomError.notFound(`The product with the id ${productId} doesn't exists`);
+            product.available=!product.available;
+            await product.save();
+            return ProductMapper.productEntityFromObject(product);
+        } catch (error) {
+            if(error instanceof CustomError){
+                throw error;
+            }
+            throw CustomError.internalServer('Internal server error');
+        }
+    }
+
 }

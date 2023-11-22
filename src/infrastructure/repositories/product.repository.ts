@@ -28,4 +28,9 @@ export class ProductRepositoryImp implements ProductRepository{
     async deleteProduct(productId: string): Promise<ProductEntity> {
        return await this.productDatasource.deleteProduct(productId);
     }
+
+    async changeAvailability(productId: string): Promise<ProductEntity> {
+        return await this.productDatasource.changeAvailability(productId);
+    }
+
 }

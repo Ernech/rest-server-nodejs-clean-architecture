@@ -9,6 +9,7 @@ import { error } from "console";
 import { GetProductsByCategory } from "../../domain/use-cases/product/get-products-by-category.use-case";
 import { DeleteProduct } from "../../domain/use-cases/product/delete-product.use-case";
 import { UpdateProduct } from "../../domain/use-cases/product/update-product.use-case";
+import { ChangeProductAvailability } from "../../domain/use-cases/product/change-product-availability.use-case copy";
 
 
 export class ProductController{
@@ -75,4 +76,11 @@ export class ProductController{
         new DeleteProduct(this.productRepository).execute(id)
         .then(data=>res.status(200).json(data))
     }
+
+    changeAvailability = async(req:Request,res:Response)=>{
+        const { id } = req.params;
+        new ChangeProductAvailability(this.productRepository).execute(id)
+        .then(data=>res.status(200).json(data));
+    }
+
 }
