@@ -16,5 +16,4 @@ export class DeleteProduct implements DeleteProductUseCase{
     async execute(productId:string): Promise<ProductEntity> {
         return await this.productRepository.deleteProduct(productId);
     }
-    
 }

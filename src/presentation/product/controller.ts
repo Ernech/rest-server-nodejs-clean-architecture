@@ -8,6 +8,7 @@ import { GetProducts } from "../../domain/use-cases/product/get-products.use-cas
 import { error } from "console";
 import { GetProductsByCategory } from "../../domain/use-cases/product/get-products-by-category.use-case";
 import { DeleteProduct } from "../../domain/use-cases/product/delete-product.use-case";
+import { UpdateProduct } from "../../domain/use-cases/product/update-product.use-case";
 
 
 export class ProductController{
@@ -58,6 +59,15 @@ export class ProductController{
 
         new GetProductsByCategory(this.productRepository).execute(id,Number(offset),Number(limit))
         .then(data=>res.status(200).json(data)).catch(error=>this.handleError(error,res));
+    }
+
+    updateProduct = async(req:Request,res:Response)=>{
+        const {id} = req.params;
+        const {user, ...data} =req.body
+        const [error, productDTO] = ProductDTO.create({user:user._id,...data});
+        if(error || !productDTO) return res.status(400).json({error});
+        new UpdateProduct(this.productRepository).execute(id,productDTO)
+        .then(data=>res.status(201).json(data)).catch(error=>this.handleError(error,res));
     }
 
     deleteProduct = async(req:Request,res:Response)=>{

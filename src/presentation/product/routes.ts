@@ -20,7 +20,7 @@ export class ProductRoutes{
         router.get('/:id',[AuthMiddleware.validateJwt, IsValidMongoId.checkId],productController.getProductById);
         router.get('/',productController.getAllProducts);
         router.get('/category/:id',[IsValidMongoId.checkId],productController.getProductsByCategory);
-        router.delete('/category/:id',[IsValidMongoId.checkId],productController.deleteProduct);
+        router.delete('/category/:id',[AuthMiddleware.validateJwt,IsValidMongoId.checkId],productController.deleteProduct);
        
        
         return router;

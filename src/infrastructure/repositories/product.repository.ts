@@ -22,8 +22,8 @@ export class ProductRepositoryImp implements ProductRepository{
    async getProductsByCategory(categoryId: string,offset:number, limit:number): Promise<ProductEntity[]> {
         return await this.productDatasource.getProductsByCategory(categoryId, offset,limit);
     }
-    async updateProduct(productId: string, categoryId: string): Promise<ProductEntity> {
-        throw new Error("Method not implemented.");
+    async updateProduct(productId: string, productDTO:ProductDTO): Promise<ProductEntity> {
+     return await this.productDatasource.updateProduct(productId,productDTO);
     }
     async deleteProduct(productId: string): Promise<ProductEntity> {
        return await this.productDatasource.deleteProduct(productId);

@@ -11,7 +11,7 @@ export abstract class ProductDatasource{
 
     abstract getProductsByCategory(categoryId:string,offset:number, limit:number):Promise<ProductEntity[]>;
 
-    abstract updateProduct(productId:string, categoryId:string):Promise<ProductEntity>;
+    abstract updateProduct(productId:string, productDTO:ProductDTO):Promise<ProductEntity>;
 
     abstract deleteProduct(productId:string):Promise<ProductEntity>;
 
