@@ -1,6 +1,6 @@
 # Node js Rest servier with Typescript, MongoBD, and Clean Architecture 
 
-# Dev
+## Dev
 1. Copy the ```.env.example``` and rename it to ```.env```
 2. Set your enviroment variables in the ```.env``` file.
 3. Execute 
