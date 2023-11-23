@@ -1,4 +1,4 @@
-# Node js Rest servier with Typescript, MongoBD, and Clean Architecture 
+# Node js Rest servier with Typescript, MongoDB, and Clean Architecture 
 
 ## Dev
 1. Copy the ```.env.example``` and rename it to ```.env```
