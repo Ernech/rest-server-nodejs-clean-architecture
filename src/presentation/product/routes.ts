@@ -4,6 +4,7 @@ import { ProductDatasourceIml } from "../../infrastructure/datasources/product.d
 import { ProductRepositoryImp } from "../../infrastructure/repositories/product.repository";
 import { AuthMiddleware } from "../middlewares/auth.middleware";
 import { IsValidMongoId } from "../middlewares/mongoId.middleware";
+import { CheckRoles } from "../middlewares/has-role.middleware";
 
 export class ProductRoutes{
 
@@ -20,7 +21,7 @@ export class ProductRoutes{
         router.get('/:id',[AuthMiddleware.validateJwt, IsValidMongoId.checkId],productController.getProductById);
         router.get('/',productController.getAllProducts);
         router.get('/category/:id',[IsValidMongoId.checkId],productController.getProductsByCategory);
-        router.delete('/:id',[AuthMiddleware.validateJwt,IsValidMongoId.checkId],productController.deleteProduct);
+        router.delete('/:id',[AuthMiddleware.validateJwt,CheckRoles.hasRole(['ADMIN_ROLE']),IsValidMongoId.checkId],productController.deleteProduct);
         router.put('/:id',[AuthMiddleware.validateJwt,IsValidMongoId.checkId], productController.updateProduct)
         router.patch('/:id',[AuthMiddleware.validateJwt,IsValidMongoId.checkId], productController.changeAvailability);
        
